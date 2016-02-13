@@ -8,7 +8,7 @@ class CreateCourses < ActiveRecord::Migration
       t.date :end_date
       t.string :status
 
-      t.references :instructor
+      t.belongs_to :instructor
       t.timestamps
     end
   end
