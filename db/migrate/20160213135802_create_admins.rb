@@ -7,5 +7,6 @@ class CreateAdmins < ActiveRecord::Migration
 
       t.timestamps
     end
+    add_index :admins, :email, :unique => true
   end
 end

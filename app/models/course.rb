@@ -12,4 +12,6 @@ class Course < ActiveRecord::Base
   validates :status, :presence=>true
   validates :instructor, :presence=>true
 
+  enum status: [:active, :inactive]
+
 end

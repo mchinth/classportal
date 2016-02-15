@@ -11,5 +11,6 @@ class CreateCourses < ActiveRecord::Migration
       t.belongs_to :instructor
       t.timestamps
     end
+    add_index :courses, :course_number, :unique => true
   end
 end

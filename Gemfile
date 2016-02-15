@@ -1,13 +1,17 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.0.0'
+#gem 'rails', '4.0.0'
+gem 'rails', :git => 'git://github.com/rails/rails.git', :tag => 'v4.1.0.beta1'
 
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
+
+#Resolving TZInfo::DataSourceNotFound Errors
+gem 'tzinfo-data'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
@@ -36,7 +40,8 @@ end
 
 #gem 'bcrypt-ruby', '~> 3.0.0'
 
-gem "bcrypt-ruby"
+#gem "bcrypt-ruby"
+gem 'bcrypt', '~> 3.1.7'
 
 # Use unicorn as the app server
 # gem 'unicorn'
