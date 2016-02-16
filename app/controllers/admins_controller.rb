@@ -1,7 +1,7 @@
 class AdminsController < ApplicationController
   before_action :set_admin, only: [:show, :edit, :update, :destroy]
 
-  before_action :require_admin_user, only: [:index, :show]
+  before_action :require_admin_user, only: [:index, :show, :home]
 
   # GET /admins
   # GET /admins.json
@@ -61,6 +61,10 @@ class AdminsController < ApplicationController
       format.html { redirect_to admins_url }
       format.json { head :no_content }
     end
+  end
+
+  def home
+      @admins=Admin.all
   end
 
   private

@@ -1,0 +1,50 @@
+<% if admin_user %>
+    <ul>
+      <li><%= admin_user.email %></li>
+      <li><%= link_to "Log out", logout_path, method: "delete" %></li>
+      <li><%= link_to 'Edit', edit_admin_path(admin_user) %></li>
+    </ul>
+
+    <h1>Listing admins</h1>
+
+    <table>
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <% @admins.each do |admin| %>
+          <tr>
+            <td><%= admin.name %></td>
+            <td><%= admin.email %></td>
+            <td><%= link_to 'Show', admin %></td>
+            <td><%= link_to 'Edit', edit_admin_path(admin) %></td>
+            <% if admin_user != admin %>
+            <td><%= link_to 'Destroy', admin, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <% end %>
+           </tr>
+      <% end %>
+      </tbody>
+    </table>
+
+    <br>
+
+    <%= link_to 'New Admin', new_admin_path %>
+
+
+
+
+<% else %>
+    <ul>
+      <li><%= link_to "Login", 'login' %></a></li>
+      <li><%= link_to "Signup", 'signup' %></a></li>
+    </ul>
+<% end %>
+
+
