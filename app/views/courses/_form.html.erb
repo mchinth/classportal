@@ -22,7 +22,7 @@
 
     <div class="field">
       <%= f.label :instructor %><br>
-      <%= f.collection_select(:instructor_id, Instructor.all, :id, :name, { :prompt => 'Select a State', :selected => @course.instructor_id }, { class: 'form-control' }) %>
+      <%= f.collection_select(:instructor_id, Instructor.all, :id, :name, { :prompt => 'Select an instructor', :selected => @course.instructor_id }, { class: 'form-control' }) %>
       </div>
 
     <div class="field">
