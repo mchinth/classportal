@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160217065321) do
+ActiveRecord::Schema.define(version: 20160217232114) do
 
   create_table "admins", force: true do |t|
     t.string   "name"
@@ -24,12 +24,12 @@ ActiveRecord::Schema.define(version: 20160217065321) do
   create_table "courses", force: true do |t|
     t.string   "course_number"
     t.string   "title"
-    t.string   "description"
-    t.string   "instructor"
+    t.text     "description"
     t.date     "start_date"
     t.date     "end_date"
-    t.boolean  "status"
-    t.integer  "instructor_id"
+    t.boolean  "is_active"
+    t.text     "notifications"
+    t.text     "deadlines"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -51,6 +51,19 @@ ActiveRecord::Schema.define(version: 20160217065321) do
     t.datetime "updated_at"
     t.string   "password_digest"
   end
+
+  create_table "user_courses", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "course_id"
+    t.boolean  "is_enrolled"
+    t.boolean  "is_teaching"
+    t.boolean  "is_requesting"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "user_courses", ["course_id"], name: "index_user_courses_on_course_id"
+  add_index "user_courses", ["user_id"], name: "index_user_courses_on_user_id"
 
   create_table "users", force: true do |t|
     t.string   "name"

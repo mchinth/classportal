@@ -25,6 +25,7 @@ Classportal::Application.routes.draw do
   delete 'logout' => 'sessions#destroy'
 
   get '/user_students'=> 'users#list_students', as: :list_students
+  get '/user_instructors' => 'users#list_instructors', as: :list_instructors
   get '/admin_home_page' => 'users#admin_home', as: :admin_home_page
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

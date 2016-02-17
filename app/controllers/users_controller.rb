@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
-  before_action :require_logged_in, only: [:adminhome]
+  before_action :require_logged_in, only: [:adminhome, :list_instructors, :list_students]
   # GET /users
   # GET /users.json
   def index
@@ -63,11 +63,15 @@ class UsersController < ApplicationController
   end
 
   def admin_home
-    @users=User.all
+    @admins=User.where(:is_admin=>true)
   end
 
   def list_students
     @students=User.where(:is_admin=>false ,:is_instructor=>false)
+  end
+
+  def list_instructors
+    @instructors=User.where(:is_admin=>false, :is_instructor=>true)
   end
 
   private

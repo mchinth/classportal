@@ -20,12 +20,6 @@
 
 
 <p>
-  <strong>Instructor:</strong>
-  <%= @course.instructor %>
-</p>
-
-
-<p>
   <strong>Start date:</strong>
   <%= @course.start_date %>
 </p>
@@ -38,8 +32,20 @@
 
 
 <p>
-  <strong>Status:</strong>
-  <%= @course.status %>
+  <strong>Is active:</strong>
+  <%= @course.is_active %>
+</p>
+
+
+<p>
+  <strong>Notifications:</strong>
+  <%= @course.notifications %>
+</p>
+
+
+<p>
+  <strong>Deadlines:</strong>
+  <%= @course.deadlines %>
 </p>
 
 

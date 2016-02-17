@@ -14,12 +14,7 @@ one:
 
 
 
-  description: MyString
-
-
-
-
-  instructor: MyString
+  description: MyText
 
 
 
@@ -34,7 +29,17 @@ one:
 
 
 
-  status: false
+  is_active: false
+
+
+
+
+  notifications: MyText
+
+
+
+
+  deadlines: MyText
 
 
 
@@ -52,12 +57,7 @@ two:
 
 
 
-  description: MyString
-
-
-
-
-  instructor: MyString
+  description: MyText
 
 
 
@@ -72,7 +72,17 @@ two:
 
 
 
-  status: false
+  is_active: false
+
+
+
+
+  notifications: MyText
+
+
+
+
+  deadlines: MyText
 
 
 

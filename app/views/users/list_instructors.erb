@@ -1,4 +1,7 @@
-<html><body>
+<% if logged_in_user.is_admin%>
+
+
+    <html><body>
 <h1>Listing users</h1>
 
 <table>
@@ -19,7 +22,7 @@
   </thead>
 
   <tbody>
-  <% @students.each do |user| %>
+  <% @instructors.each do |user| %>
       <tr>
 
         <td><%= user.name %></td>
@@ -44,3 +47,10 @@
 
 <br>
 </body></html>
+
+<% else %>
+    <ul>
+      <li><%= link_to "Login", 'login' %></a></li>
+    </ul>
+<% end %>
+

@@ -7,7 +7,7 @@
       <li><%= link_to 'Edit your profile details', edit_user_path(logged_in_user) %></li>
     </ul>
 
-    <h1>Listing users</h1>
+    <h1>Listing admins</h1>
 
     <table>
       <thead>
@@ -28,23 +28,25 @@
       </thead>
 
       <tbody>
-      <% @users.each do |user| %>
+      <% @admins.each do |admin| %>
           <tr>
 
-            <td><%= user.name %></td>
+            <td><%= admin.name %></td>
 
-            <td><%= user.email %></td>
+            <td><%= admin.email %></td>
 
-            <td><%= user.password %></td>
+            <td><!%= admin.password %></td>
 
-            <td><%= user.is_admin %></td>
+            <td><%= admin.is_admin %></td>
 
-            <td><%= user.is_instructor %></td>
+            <td><%= admin.is_instructor %></td>
 
-            <td><%= link_to 'Show', user %></td>
-            <td><%= link_to 'Edit', edit_user_path(user) %></td>
-            <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-          </tr>
+            <td><%= link_to 'Show', admin %></td>
+            <td><%= link_to 'Edit', edit_user_path(admin) %></td>
+            <% if admin!=logged_in_user && admin.id!=1 %>
+            <td><%= link_to 'Destroy', admin, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <% end %>
+                </tr>
       <% end %>
       </tbody>
     </table>
@@ -55,8 +57,8 @@
 
     <br><br>
     <!%= link_to "Show all admins", user_admins_path %><br>
-    <%= link_to "Show all students", list_students_path %><br>
-    <%= link_to "Show all instructors", instructors_path %><br>
+    <%= link_to "Manage students", list_students_path %><br>
+    <%= link_to "Show all instructors", list_instructors_path %><br>
     <%= link_to "Show all courses", courses_path %><br>
     <%= link_to "Show all studentcourses", student_courses_path %><br>
 

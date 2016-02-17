@@ -1,19 +1,14 @@
 
 class Course < ActiveRecord::Base
-  #belongs_to :user
 
-  has_many :student_courses
-  has_many :users, through: :student_courses
+ validates :course_number, presence:  true, uniqueness: true
+  validates :title, presence: true
+ validates :description, presence: true
+ validates :start_date, presence: true
+ validates :end_date, presence: true
 
-  validates :course_number, :presence=>true, :uniqueness => true, length: {maximum: 10}
-  validates :title, :presence=>true
-  validates :description, :presence=>true
-  validates :start_date, :presence=>true
-  validates :end_date, :presence=>true
-  validates :status, :presence=>true
-  validates :instructor, :presence=>true
-
-  #enum status: [:active, :inactive]
+  has_many :user_courses
+  has_many :users, through: :user_courses
 
 end
 
