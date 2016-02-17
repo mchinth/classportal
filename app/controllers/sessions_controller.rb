@@ -6,35 +6,28 @@ class SessionsController < ApplicationController
   end
 
   def create
-    @user = Admin.find_by_email(params[:session][:email])
+    @user = User.find_by_email(params[:session][:email])
+    @user_admin_role=User.find_by_is_admin(params[:session][:email])
+    @user_instructor_role=User.find_by_is_instructor(params[:session][:email])
+
     if @user && @user.authenticate(params[:session][:password])
-      session[:user_id] = @user.id
-      session[:user_email] = @user.email
-      redirect_to '/admin_home_page'
-    elsif @user
-      flash.now[:danger] ='Invalid email/password combination'
-      render 'new'
-      #redirect_to '/login'
-    else
-      @user=Instructor.find_by_email(params[:session][:email])
-      if @user && @user.authenticate(params[:session][:password])
+      if @user_admin_role
         session[:user_id] = @user.id
         session[:user_email] = @user.email
-        redirect_to '/'
-      elsif @user
-        redirect_to '/login'
+        redirect_to '/admin_home_page'
+      elsif @user_instructor_role
+        session[:user_id] = @user.id
+        session[:user_email] = @user.email
+        redirect_to '/instructor_home_page'
       else
-        @user=Student.find_by_email(params[:session][:email])
-        if @user && @user.authenticate(params[:session][:password])
-          session[:user_id] = @user.id
-          session[:user_email] = @user.email
-          redirect_to '/'
-        else
-          flash.now[:danger] ='Invalid email/password combination'
-          redirect_to '/login'
-
-        end
+        session[:user_id] = @user.id
+        session[:user_email] = @user.email
+        redirect_to '/student_home_page'
       end
+    else
+       flash.now[:danger] ='Invalid email/password combination'
+       redirect_to '/login'
+
     end
   end
 

@@ -2,7 +2,7 @@ class Course < ActiveRecord::Base
   belongs_to :instructor
 
   has_many :student_courses
-  has_many :students, through: :student_courses
+  has_many :users, through: :users_courses
 
   validates :course_number, :presence=>true, :uniqueness => true, length: {maximum: 10}
   validates :title, :presence=>true

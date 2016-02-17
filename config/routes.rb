@@ -1,4 +1,6 @@
 Classportal::Application.routes.draw do
+  resources :users
+
   resources :student_courses
 
   resources :courses
@@ -13,9 +15,9 @@ Classportal::Application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'admins#index'
+  #root 'admins#index'
 
-  get '/login' => 'sessions#new'
+  root '/login' => 'sessions#new'
   post 'login' => 'sessions#create'
   delete 'logout' => 'sessions#destroy'
 
