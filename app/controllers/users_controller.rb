@@ -62,8 +62,12 @@ class UsersController < ApplicationController
     end
   end
 
-  def adminhome
+  def admin_home
     @users=User.all
+  end
+
+  def list_students
+    @students=User.where(:is_admin=>false ,:is_instructor=>false)
   end
 
   private

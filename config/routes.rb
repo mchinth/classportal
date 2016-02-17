@@ -20,11 +20,12 @@ Classportal::Application.routes.draw do
 
   root 'sessions#new'
   get '/login' => 'sessions#new'
-  get '/rootadmincreate'=> 'users#new'
+  #get '/rootadmincreate'=> 'users#new'
   post 'login' => 'sessions#create'
   delete 'logout' => 'sessions#destroy'
 
-  get '/admin_home_page' => 'users#adminhome', as: :admin_home_page
+  get '/user_students'=> 'users#list_students', as: :list_students
+  get '/admin_home_page' => 'users#admin_home', as: :admin_home_page
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

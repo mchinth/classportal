@@ -51,8 +51,14 @@
 
     <br>
 
-    <%= link_to 'New User', new_user_path %>
+    <%= link_to 'New Instructor/Admin', new_user_path %>
 
+    <br><br>
+    <!%= link_to "Show all admins", user_admins_path %><br>
+    <%= link_to "Show all students", list_students_path %><br>
+    <%= link_to "Show all instructors", instructors_path %><br>
+    <%= link_to "Show all courses", courses_path %><br>
+    <%= link_to "Show all studentcourses", student_courses_path %><br>
 
 
 <% else %>
