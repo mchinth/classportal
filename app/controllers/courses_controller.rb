@@ -1,6 +1,8 @@
 class CoursesController < ApplicationController
   before_action :set_course, only: [:show, :edit, :update, :destroy]
 
+  before_action :require_admin_user, only: [:new, :edit, :update, :destroy]
+
   # GET /courses
   # GET /courses.json
   def index

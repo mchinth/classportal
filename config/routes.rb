@@ -19,7 +19,7 @@ Classportal::Application.routes.draw do
   post 'login' => 'sessions#create'
   delete 'logout' => 'sessions#destroy'
 
-  get '/admin_home_page' => 'admins#home'
+  get '/admin_home_page' => 'admins#home', as: :admin_home_page
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
