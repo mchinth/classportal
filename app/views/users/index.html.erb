@@ -1,4 +1,13 @@
-<h1>Listing users</h1>
+<% if logged_in_user.is_admin %>
+    <ul>
+      <h2> USER PROFILE </h2>
+      <li><%= admin_user.name %></li>
+      <li><%= admin_user.email %></li>
+      <li><%= link_to "Log out", logout_path, method: "delete" %></li>
+      <li><%= link_to 'Edit your profile details', edit_users_path(admin_user) %></li>
+    </ul>
+
+    <h1>Listing users</h1>
 
 <table>
   <thead>
@@ -43,3 +52,12 @@
 <br>
 
 <%= link_to 'New User', new_user_path %>
+
+
+
+<% else %>
+    <ul>
+      <li><%= link_to "Login", 'login' %></a></li>
+    </ul>
+<% end %>
+

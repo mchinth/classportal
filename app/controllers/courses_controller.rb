@@ -1,8 +1,6 @@
 class CoursesController < ApplicationController
   before_action :set_course, only: [:show, :edit, :update, :destroy]
 
-  before_action :require_admin_user, only: [:new, :edit, :update, :destroy]
-
   # GET /courses
   # GET /courses.json
   def index
@@ -71,6 +69,6 @@ class CoursesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def course_params
-      params.require(:course).permit(:course_number, :title, :description, :start_date, :end_date, :status, :instructor_id)
+      params.require(:course).permit(:course_number, :title, :description, :instructor, :start_date, :end_date, :status)
     end
 end

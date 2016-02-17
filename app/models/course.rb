@@ -1,8 +1,9 @@
+
 class Course < ActiveRecord::Base
-  belongs_to :instructor
+  #belongs_to :user
 
   has_many :student_courses
-  has_many :users, through: :users_courses
+  has_many :users, through: :student_courses
 
   validates :course_number, :presence=>true, :uniqueness => true, length: {maximum: 10}
   validates :title, :presence=>true
@@ -12,6 +13,7 @@ class Course < ActiveRecord::Base
   validates :status, :presence=>true
   validates :instructor, :presence=>true
 
-  enum status: [:active, :inactive]
+  #enum status: [:active, :inactive]
 
 end
+

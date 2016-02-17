@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
+  before_action :require_logged_in, only: [:adminhome]
   # GET /users
   # GET /users.json
   def index
@@ -59,6 +60,10 @@ class UsersController < ApplicationController
       format.html { redirect_to users_url }
       format.json { head :no_content }
     end
+  end
+
+  def adminhome
+    @users=User.all
   end
 
   private

@@ -16,12 +16,15 @@ Classportal::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   #root 'admins#index'
+  #root 'sessions#new'
 
-  root '/login' => 'sessions#new'
+  root 'sessions#new'
+  get '/login' => 'sessions#new'
+  get '/rootadmincreate'=> 'users#new'
   post 'login' => 'sessions#create'
   delete 'logout' => 'sessions#destroy'
 
-  get '/admin_home_page' => 'admins#home', as: :admin_home_page
+  get '/admin_home_page' => 'users#adminhome', as: :admin_home_page
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

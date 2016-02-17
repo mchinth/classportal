@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160216204026) do
+ActiveRecord::Schema.define(version: 20160217065321) do
 
   create_table "admins", force: true do |t|
     t.string   "name"
@@ -24,14 +24,17 @@ ActiveRecord::Schema.define(version: 20160216204026) do
   create_table "courses", force: true do |t|
     t.string   "course_number"
     t.string   "title"
-    t.text     "description"
+    t.string   "description"
+    t.string   "instructor"
     t.date     "start_date"
     t.date     "end_date"
-    t.string   "status"
+    t.boolean  "status"
     t.integer  "instructor_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "courses", ["course_number"], name: "index_courses_on_course_number", unique: true
 
   create_table "instructors", force: true do |t|
     t.string   "name"
@@ -41,14 +44,19 @@ ActiveRecord::Schema.define(version: 20160216204026) do
     t.string   "password_digest"
   end
 
-  create_table "student_courses", force: true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "students", force: true do |t|
     t.string   "name"
     t.string   "email"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "password_digest"
+  end
+
+  create_table "users", force: true do |t|
+    t.string   "name"
+    t.string   "email"
+    t.boolean  "is_admin"
+    t.boolean  "is_instructor"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "password_digest"
