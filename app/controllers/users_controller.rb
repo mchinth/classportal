@@ -74,6 +74,12 @@ class UsersController < ApplicationController
     @instructors=User.where(:is_admin=>false, :is_instructor=>true)
   end
 
+  def list_user_course
+    @user_courses=UserCourse.all
+    @users=User.all
+    @courses=Course.all
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user

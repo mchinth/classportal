@@ -3,12 +3,12 @@ class CreateUserCourses < ActiveRecord::Migration
     create_table :user_courses do |t|
 
 
-      t.belongs_to :user, index: true
-      t.belongs_to :course, index: true
-
-      t.boolean :is_enrolled
       t.boolean :is_teaching
-      t.boolean :is_requesting
+      t.boolean :is_enrolled
+      t.boolean :has_requested_enrollment
+      t.string :grade
+      t.references :user
+      t.references :course
 
       t.timestamps
 

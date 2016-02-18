@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+
+<p>
+  <strong>Is teaching:</strong>
+  <%= @user_course.is_teaching %>
+</p>
+
+
+<p>
+  <strong>Is enrolled:</strong>
+  <%= @user_course.is_enrolled %>
+</p>
+
+
+<p>
+  <strong>Has requested enrollment:</strong>
+  <%= @user_course.has_requested_enrollment %>
+</p>
+
+
+<p>
+  <strong>Grade:</strong>
+  <%= @user_course.grade %>
+</p>
+
+
+<%= link_to 'Edit', edit_user_course_path(@user_course) %> |
+<%= link_to 'Back', user_courses_path %>
