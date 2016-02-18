@@ -29,6 +29,11 @@ Classportal::Application.routes.draw do
   get '/user_students'=> 'users#list_students', as: :list_students
   get '/user_instructors' => 'users#list_instructors', as: :list_instructors
   get '/admin_home_page' => 'users#admin_home', as: :admin_home_page
+
+  get '/signup' => 'users#new'
+  get '/student_home_page' =>'users#student_home_page', as: :student_home_page
+
+  get '/drop_course' => 'users#drop_course', as: :drop_course
   #get '/add_user_course_rel' =>'users#list_user_course', as: :list_user_courses
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

@@ -20,8 +20,6 @@
 
         <th>Email</th>
 
-        <th>Password</th>
-
         <th>Is admin</th>
 
         <th>Is instructor</th>
@@ -37,8 +35,6 @@
             <td><%= admin.name %></td>
 
             <td><%= admin.email %></td>
-
-            <td><%= admin.password %></td>
 
             <td><%= admin.is_admin %></td>
 
@@ -61,8 +57,10 @@
     <br><br>
     <!%= link_to "Show all admins", user_admins_path %><br>
     <%= link_to "Manage students", list_students_path %><br>
-    <%= link_to "Show all instructors", list_instructors_path %><br>
+    <%= link_to "Manage instructors", list_instructors_path %><br>
     <%= link_to "Manage courses", courses_path %><br>
+    <%= link_to "View all users", users_path %><br>
+
     <%= link_to "Show all studentcourses", user_courses_path %><br>
 
 

@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
-  before_action :require_logged_in, only: [:adminhome, :list_instructors, :list_students]
+  before_action :require_logged_in, only: [:admin_home, :list_instructors, :list_students]
   # GET /users
   # GET /users.json
   def index
@@ -80,7 +80,25 @@ class UsersController < ApplicationController
     @courses=Course.all
   end
 
-  private
+  def student_home_page
+    @courses=Course.all
+    #@own_courses=UserCourse.where(:user_id => [:sess])
+    #@own_courses=UserCourse.where(:user_id=>session[:user_id]) if session[:user_id]
+    @user=User.find_by_id(session[:user_id]) if session[:user_id]
+    @my_courses=@user.courses
+  end
+
+  def drop_course(course)
+    @user=User.find_by_id(session[:user_id]) if session[:user_id]
+    @my_course_del=@user.user_courses.find_by_course_id(course.id)
+    @my_course_del.destroy
+    respond_to do |format|
+      format.html { redirect_to student_home_page_path }
+      format.json { head :no_content }
+    end
+  end
+
+    private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
       @user = User.find(params[:id])

@@ -1,10 +1,12 @@
 <% if logged_in_user.is_admin %>
     <ul>
       <h2> USER PROFILE </h2>
-      <li><%= admin_user.name %></li>
-      <li><%= admin_user.email %></li>
+      <li><%= logged_in_user.name %></li>
+      <li><%= logged_in_user.email %></li>
       <li><%= link_to "Log out", logout_path, method: "delete" %></li>
-      <li><%= link_to 'Edit your profile details', edit_users_path(admin_user) %></li>
+      <li><%= link_to "Back to home page", admin_home_page_path %></li>
+
+      <li><%= link_to 'Edit your profile details', edit_user_path(logged_in_user) %></li>
     </ul>
 
     <h1>Listing users</h1>
@@ -17,7 +19,6 @@
 
       <th>Email</th>
 
-      <th>Password</th>
 
       <th>Is admin</th>
 
@@ -35,7 +36,6 @@
 
         <td><%= user.email %></td>
 
-        <td><%= user.password %></td>
 
         <td><%= user.is_admin %></td>
 
@@ -43,7 +43,9 @@
 
         <td><%= link_to 'Show', user %></td>
         <td><%= link_to 'Edit', edit_user_path(user) %></td>
-        <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% if user!=logged_in_user && user.id!=1 %>
+            <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <% end %>
       </tr>
     <% end %>
   </tbody>
