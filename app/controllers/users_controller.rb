@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
-  before_action :require_logged_in, only: [:admin_home_page, :list_instructors, :list_students, :student_home_page, :instructor_home_page]
+  before_action :require_logged_in, only: [:admin_home_page, :list_instructors, :list_students, :student_home_page, :instructor_home_page, :show]
 
   # GET /users
   # GET /users.json
