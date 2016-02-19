@@ -1,3 +1,12 @@
+<h2>Search for course</h2>
+<%= form_tag courses_path, :method=>'get' do %>
+    <p>
+      <%= text_field_tag :search, params[:search] %>
+      <%= submit_tag 'Search', :name=>nil %>
+    </p>
+<% end %>
+
+
 <h1>Listing courses</h1>
 
 <table>
@@ -28,7 +37,8 @@
   </thead>
 
   <tbody>
-    <% @courses.each do |course| %>
+
+      <% @courses.each do |course| %>
       <tr>
 
         <td><%= course.course_number %></td>
@@ -70,4 +80,8 @@
 <% if logged_in_user.is_admin %>
 <%= link_to 'Add New Course', new_course_path %><br>
 <%= link_to 'Back to admin home page', admin_home_page_path %>
+<% end %>
+
+<% if logged_in_user.is_admin==false && logged_in_user.is_instructor==false %>
+    <%= link_to 'Back to student home page', student_home_page_path %>
 <% end %>

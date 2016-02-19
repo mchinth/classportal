@@ -4,8 +4,28 @@ class CoursesController < ApplicationController
   # GET /courses
   # GET /courses.json
   def index
-    @courses = Course.all
 
+    @courses = Course.all
+    @a = Course.search(params[:search]) if params[:search].present?
+
+    @instructors = User.search(params[:search]) if params[:search].present?
+
+    if @instructors
+      @instructors.each do |x|
+      @b=x.courses
+      end
+    end
+    if @a
+      @courses=@a
+      if @b
+        @courses=@courses+@b
+      end
+    elsif @b
+        @courses=@b
+    end
+
+    #@instructors=User.where(:is_admin=>false, :is_instructor=>true)
+    #@instructors.
   end
 
   # GET /courses/1

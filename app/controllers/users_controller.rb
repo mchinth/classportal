@@ -1,7 +1,8 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
-  before_action :require_logged_in, only: [:admin_home, :list_instructors, :list_students]
+  before_action :require_logged_in, only: [:admin_home, :list_instructors, :list_students, :student_home_page]
+
   # GET /users
   # GET /users.json
   def index
@@ -63,7 +64,12 @@ class UsersController < ApplicationController
   end
 
   def admin_home
-    @admins=User.where(:is_admin=>true)
+    if logged_in_user.is_admin
+      @admins=User.where(:is_admin=>true)
+    else
+      flash[:notice] = "not enough rights !"
+      redirect_to '/login'
+    end
   end
 
   def list_students
@@ -86,6 +92,7 @@ class UsersController < ApplicationController
     #@own_courses=UserCourse.where(:user_id=>session[:user_id]) if session[:user_id]
     @user=User.find_by_id(session[:user_id]) if session[:user_id]
     @my_courses=@user.courses
+    @my_course_mappings=@user.user_courses
   end
 
   def drop_course(course)

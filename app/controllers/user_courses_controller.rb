@@ -55,12 +55,23 @@ class UserCoursesController < ApplicationController
   # DELETE /user_courses/1.json
   def destroy
     @user_course.destroy
+    if logged_in_user.is_admin
     respond_to do |format|
       format.html { redirect_to user_courses_url }
       format.json { head :no_content }
     end
-  end
-
+    elsif logged_in_user.is_instructor
+      respond_to do |format|
+        format.html { redirect_to user_courses_url }
+        format.json { head :no_content }
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to student_home_page_url }
+        format.json { head :no_content }
+      end
+    end
+end
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user_course
