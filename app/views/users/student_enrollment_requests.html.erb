@@ -1,96 +1,49 @@
-<% if logged_in_user %>
-    <ul>
-      <h2> INSTRUCTOR PROFILE </h2>
-      <li><%= logged_in_user.name %></li>
-      <li><%= logged_in_user.email %></li>
-      <li><%= link_to "Log out", logout_path, method: "delete" %></li>
-      <li><%= link_to 'Edit your profile details', edit_user_path(logged_in_user) %></li>
-      <li><%= link_to "Instructor home page", instructor_home_page_path %></li>
+<h1>Listing user_courses</h1>
 
-    </ul>
+<table>
+  <thead>
+  <tr>
 
+    <th> User </th>
 
-    <h1> Your course enrollment requests </h1>
+    <th> course </th>
 
-    <table>
-      <thead>
+    <th>Is teaching</th>
+
+    <th>Is enrolled</th>
+
+    <th>Has requested enrollment</th>
+
+    <th>Grade</th>
+
+    <th colspan="3"></th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @students_enrollment_requests.each do |user_course| %>
       <tr>
+        <td><%= user_course.user_id %></td>
 
-        <th>Course number</th>
+        <td><%= user_course.course_id %></td>
 
-        <th>Title</th>
+        <td><%= user_course.is_teaching %></td>
 
-        <th>Description</th>
+        <td><%= user_course.is_enrolled %></td>
 
-        <th>Start date</th>
+        <td><%= user_course.has_requested_enrollment %></td>
 
-        <th>End date</th>
+        <td><%= user_course.grade %></td>
 
-        <th>Is active</th>
-
-        <th>Notifications</th>
-
-        <th>Deadlines</th>
-
-        <!--th>Instructors</th-->
-
-        <!--th>Grade</th-->
-
-        <th colspan="3"></th>
+        <td><%= link_to 'Show', user_course %></td>
+        <td><%= link_to 'Edit', edit_user_course_path(user_course) %></td>
+        <td><%= link_to 'Destroy', user_course, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
-      </thead>
+  <% end %>
+  </tbody>
+</table>
 
-      <tbody>
-      <% @my_course_mappings.each do |mapping| %>
-          <tr>
+<br>
 
-            <td><%= mapping.course.course_number %></td>
-
-            <td><%= mapping.course.title %></td>
-
-            <td><%= mapping.course.description %></td>
-
-            <td><%= mapping.course.start_date %></td>
-
-            <td><%= mapping.course.end_date %></td>
-
-            <td><%= mapping.course.is_active %></td>
-
-            <td><%= mapping.course.notifications %></td>
-
-            <td><%= mapping.course.deadlines %></td>
-
-
-            <!--td>
-              <!% mapping.course.users.each do |user| %>
-                  <!% if user.is_instructor %>
-                      <li><!%= user.name %></li>
-                  <!% end %>
-              <!% end %>
-            </td-->
-            <!--td><!%= mapping.grade %></td-->
-            <td><%= link_to 'Show course', course_path(mapping.course) %></td>
-            <td><%= link_to 'View course requests', student_enrollment_requests_path(mapping.course) %></td>
-
-
-            <td><%= link_to 'Drop course', mapping, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-          </tr>
-      <% end %>
-      </tbody>
-    </table>
-
-    <br>
-
-
-    <br><br>
-    <!%= link_to "Show all admins", user_admins_path %><br>
-    <%= link_to "Show all courses", courses_path %><br>
-
-
-
-<% else %>
-    <ul>
-      <li><%= link_to "Login", 'login' %></a></li>
-    </ul>
-<% end %>
-
+<%= link_to 'New User course', new_user_course_path %>
+<%= link_to 'Back to Admin Page', admin_home_page_path %>

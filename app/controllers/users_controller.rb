@@ -102,20 +102,13 @@ class UsersController < ApplicationController
 
   end
 
-  def drop_course(course)
-    @user=User.find_by_id(session[:user_id]) if session[:user_id]
-    @my_course_del=@user.user_courses.find_by_course_id(course.id)
-    @my_course_del.destroy
-    respond_to do |format|
-      format.html { redirect_to student_home_page_path }
-      format.json { head :no_content }
-    end
-  end
 
-  def student_enrollment_requests(course)
+  def student_enrollment_requests
+      @my_course=params[:course]
+      @course=Course.find_by_id(@my_course)
       @instructor=User.find_by_id(session[:user_id]) if session[:user_id]
+      @students_enrollment_requests=UserCourse.where(:course_id=>@course.id, :has_requested_enrollment=>true)
 
-      @students_enrollment_requests=@instructor.user_courses.where(:course_id=>course.id, :has_requested_enrollment=>true)
   end
 
     private
@@ -127,5 +120,9 @@ class UsersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
       params.require(:user).permit(:name, :email, :password, :is_admin, :is_instructor)
+    end
+
+    def req_params
+      params.require(:course).permit(:course_id)
     end
 end
