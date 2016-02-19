@@ -1,11 +1,11 @@
 <% if logged_in_user %>
     <ul>
-      <h2> USER PROFILE </h2>
+      <h2> INSTRUCTOR PROFILE </h2>
       <li><%= logged_in_user.name %></li>
       <li><%= logged_in_user.email %></li>
       <li><%= link_to "Log out", logout_path, method: "delete" %></li>
       <li><%= link_to 'Edit your profile details', edit_user_path(logged_in_user) %></li>
-      <li><%= link_to "Student home page", student_home_page_path %></li>
+      <li><%= link_to "Instructor home page", instructor_home_page_path %></li>
 
     </ul>
 
@@ -32,9 +32,9 @@
 
         <th>Deadlines</th>
 
-        <th>Instructors</th>
+        <!--th>Instructors</th-->
 
-        <th>Grade</th>
+        <!--th>Grade</th-->
 
         <th colspan="3"></th>
       </tr>
@@ -61,17 +61,20 @@
             <td><%= mapping.course.deadlines %></td>
 
 
-            <td>
-              <% mapping.course.users.each do |user| %>
-                  <% if user.is_instructor %>
-                      <li><%= user.name %></li>
-                  <% end %>
-              <% end %>
-            </td>
-            <td><%= mapping.grade %></td>
+            <!--td>
+              <!% mapping.course.users.each do |user| %>
+                  <!% if user.is_instructor %>
+                      <li><!%= user.name %></li>
+                  <!% end %>
+              <!% end %>
+            </td-->
+            <!--td><!%= mapping.grade %></td-->
             <td><%= link_to 'Show course', course_path(mapping.course) %></td>
+            <td><%= link_to 'Edit course', edit_course_path(mapping.course) %></td>
 
-            <td><%= link_to 'Drop course', mapping, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <!--td><!%= link_to 'View course requests', student_enrollment_requests_path(mapping.course) %></td-->
+
+
           </tr>
       <% end %>
       </tbody>

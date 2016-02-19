@@ -31,5 +31,10 @@
 </p>
 
 
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', admin_home_page_path %>
+<%= link_to 'Edit', edit_user_path(@user) %>
+<% if logged_in_user.is_admin %>
+<%= link_to 'Back to admin home page', admin_home_page_path %>
+<% end %>
+<% if logged_in_user.is_admin==false && logged_in_user.is_instructor==false %>
+    <%= link_to 'Back to student home page', student_home_page_path %>
+<% end %>

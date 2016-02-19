@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
-  before_action :require_logged_in, only: [:admin_home, :list_instructors, :list_students, :student_home_page]
+  before_action :require_logged_in, only: [:admin_home_page, :list_instructors, :list_students, :student_home_page, :instructor_home_page]
 
   # GET /users
   # GET /users.json
@@ -63,7 +63,7 @@ class UsersController < ApplicationController
     end
   end
 
-  def admin_home
+  def admin_home_page
     if logged_in_user.is_admin
       @admins=User.where(:is_admin=>true)
     else
@@ -95,6 +95,13 @@ class UsersController < ApplicationController
     @my_course_mappings=@user.user_courses
   end
 
+  def instructor_home_page
+    @instructor=User.find_by_id(session[:user_id]) if session[:user_id]
+    @courses_taught=@instructor.courses
+    @my_course_mappings=@instructor.user_courses
+
+  end
+
   def drop_course(course)
     @user=User.find_by_id(session[:user_id]) if session[:user_id]
     @my_course_del=@user.user_courses.find_by_course_id(course.id)
@@ -103,6 +110,12 @@ class UsersController < ApplicationController
       format.html { redirect_to student_home_page_path }
       format.json { head :no_content }
     end
+  end
+
+  def student_enrollment_requests(course)
+      @instructor=User.find_by_id(session[:user_id]) if session[:user_id]
+
+      @students_enrollment_requests=@instructor.user_courses.where(:course_id=>course.id, :has_requested_enrollment=>true)
   end
 
     private
