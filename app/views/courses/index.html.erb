@@ -70,6 +70,7 @@
         <td><%= link_to 'Edit', edit_course_path(course) %></td>
         <td><%= link_to 'Destroy', course, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       <% end %>
+
       </tr>
     <% end %>
   </tbody>
@@ -84,4 +85,8 @@
 
 <% if logged_in_user.is_admin==false && logged_in_user.is_instructor==false %>
     <%= link_to 'Back to student home page', student_home_page_path %>
+<% end %>
+
+<% if session[:role]=='instructor' %>
+    <%= link_to 'Back', instructor_home_page_path %>
 <% end %>

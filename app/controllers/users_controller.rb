@@ -92,7 +92,28 @@ class UsersController < ApplicationController
     #@own_courses=UserCourse.where(:user_id=>session[:user_id]) if session[:user_id]
     @user=User.find_by_id(session[:user_id]) if session[:user_id]
     @my_courses=@user.courses
+    @my_enrolled_courses=@user.user_courses.where(:is_enrolled=>true)
+    @my_requested_courses=@user.user_courses.where(:has_requested_enrollment=>true)
     @my_course_mappings=@user.user_courses
+
+    @un_enrolled_courses=@courses-@my_courses
+
+  end
+
+  def enroll_student
+      @course=params[:course]
+      @user_course=UserCourse.new(:user_id=>session[:user_id],:course_id=>@course, :has_requested_enrollment=>true)
+
+      respond_to do |format|
+        if @user_course.save
+          format.html { redirect_to @user_course, notice: 'Enrollment request generated.' }
+          format.json { render action: 'show', status: :created, location: @user_course }
+        else
+          format.html { render action: 'student_home_page' }
+          format.json { render json: @user_course.errors, status: :unprocessable_entity }
+        end
+      end
+
   end
 
   def instructor_home_page
@@ -109,6 +130,9 @@ class UsersController < ApplicationController
       @instructor=User.find_by_id(session[:user_id]) if session[:user_id]
       @students_enrollment_requests=UserCourse.where(:course_id=>@course.id)
 
+  end
+
+  def enroll
   end
 
     private

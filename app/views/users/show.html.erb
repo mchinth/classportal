@@ -33,10 +33,15 @@
 
 <%= link_to 'Edit', edit_user_path(@user) %>
 
-<% if logged_in_user.is_admin %>
+<% if session[:role]=='admin' %>
 <%= link_to 'Back to admin home page', admin_home_page_path %>
 <% end %>
 
-<% if logged_in_user.is_admin==false && logged_in_user.is_instructor==false %>
+<% if session[:role]=='student' %>
     <%= link_to 'Back to student home page', student_home_page_path %>
 <% end %>
+
+<% if session[:role]=='instructor' %>
+    <%= link_to 'Back to instructor home page', instructor_home_page_path %>
+<% end %>
+
