@@ -107,7 +107,7 @@ class UsersController < ApplicationController
       @my_course=params[:course]
       @course=Course.find_by_id(@my_course)
       @instructor=User.find_by_id(session[:user_id]) if session[:user_id]
-      @students_enrollment_requests=UserCourse.where(:course_id=>@course.id, :has_requested_enrollment=>true)
+      @students_enrollment_requests=UserCourse.where(:course_id=>@course.id)
 
   end
 

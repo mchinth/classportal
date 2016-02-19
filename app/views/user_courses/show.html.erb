@@ -26,4 +26,9 @@
 
 
 <%= link_to 'Edit', edit_user_course_path(@user_course) %> |
+<% if session[:role]=='admin' %>
 <%= link_to 'Back', user_courses_path %>
+<% end %>
+<% if session[:role]=='instructor' %>
+    <%= link_to 'Back', instructor_home_page_path %>
+<% end %>

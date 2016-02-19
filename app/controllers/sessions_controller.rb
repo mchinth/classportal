@@ -14,14 +14,17 @@ class SessionsController < ApplicationController
       if @user.is_admin
         session[:user_id] = @user.id
         session[:user_email] = @user.email
+        session[:role]='admin'
         redirect_to '/admin_home_page'
       elsif @user.is_instructor
         session[:user_id] = @user.id
         session[:user_email] = @user.email
+        session[:role]='instructor'
         redirect_to '/instructor_home_page'
       else
         session[:user_id] = @user.id
         session[:user_email] = @user.email
+        session[:role]='student'
         redirect_to '/student_home_page'
       end
     else
