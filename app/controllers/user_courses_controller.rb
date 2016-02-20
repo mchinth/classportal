@@ -25,7 +25,6 @@ class UserCoursesController < ApplicationController
   # POST /user_courses.json
   def create
     @user_course = UserCourse.new(user_course_params)
-
     respond_to do |format|
       if @user_course.save
         format.html { redirect_to @user_course, notice: 'User course was successfully created.' }

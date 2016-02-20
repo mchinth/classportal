@@ -1,4 +1,8 @@
 Classportal::Application.routes.draw do
+
+
+  resources :messages
+
   resources :user_courses
 
   resources :users

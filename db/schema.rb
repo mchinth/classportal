@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160218200946) do
+ActiveRecord::Schema.define(version: 20160220051440) do
 
   create_table "admins", force: true do |t|
     t.string   "name"
@@ -19,6 +19,11 @@ ActiveRecord::Schema.define(version: 20160218200946) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "password_digest"
+  end
+
+  create_table "conversations", force: true do |t|
+    t.integer "sender_id"
+    t.integer "receiver_id"
   end
 
   create_table "courses", force: true do |t|
@@ -52,7 +57,29 @@ ActiveRecord::Schema.define(version: 20160218200946) do
     t.string   "password_digest"
   end
 
+  create_table "user_course_histories", force: true do |t|
+    t.boolean  "is_teaching"
+    t.boolean  "is_enrolled"
+    t.boolean  "has_requested_enrollment"
+    t.string   "grade"
+    t.integer  "user_id"
+    t.integer  "course_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "user_courses", force: true do |t|
+    t.boolean  "is_teaching"
+    t.boolean  "is_enrolled"
+    t.boolean  "has_requested_enrollment"
+    t.string   "grade"
+    t.integer  "user_id"
+    t.integer  "course_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "user_courses_history", force: true do |t|
     t.boolean  "is_teaching"
     t.boolean  "is_enrolled"
     t.boolean  "has_requested_enrollment"
@@ -66,13 +93,11 @@ ActiveRecord::Schema.define(version: 20160218200946) do
   create_table "users", force: true do |t|
     t.string   "name"
     t.string   "email"
-    t.boolean  "is_admin",        default: false
-    t.boolean  "is_instructor",   default: false
+    t.boolean  "is_admin"
+    t.boolean  "is_instructor"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "password_digest"
   end
-
-  add_index "users", ["email"], name: "index_users_on_email"
 
 end
