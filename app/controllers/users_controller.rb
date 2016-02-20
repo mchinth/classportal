@@ -102,7 +102,7 @@ class UsersController < ApplicationController
 
   def enroll_student
       @course=params[:course]
-      @user_course=UserCourse.new(:user_id=>session[:user_id],:course_id=>@course, :has_requested_enrollment=>true)
+      @user_course=UserCourse.new(:user_id=>session[:user_id],:course_id=>@course, :has_requested_enrollment=>true, :is_teaching=>false, :is_enrolled=> false )
 
       respond_to do |format|
         if @user_course.save
