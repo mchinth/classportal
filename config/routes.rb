@@ -36,7 +36,7 @@ Classportal::Application.routes.draw do
   get '/user_instructors' => 'users#list_instructors', as: :list_instructors
   get '/admin_home_page' => 'users#admin_home_page', as: :admin_home_page
 
-  get '/signup' => 'users#new'
+  get '/signup' => 'users#new', as: :signup
   get '/student_home_page' =>'users#student_home_page', as: :student_home_page
 
   get '/instructor_home_page' => 'users#instructor_home_page', as: :instructor_home_page
