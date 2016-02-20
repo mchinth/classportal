@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160220051440) do
+ActiveRecord::Schema.define(version: 20160220054955) do
 
   create_table "admins", force: true do |t|
     t.string   "name"
@@ -48,6 +48,19 @@ ActiveRecord::Schema.define(version: 20160220051440) do
     t.datetime "updated_at"
     t.string   "password_digest"
   end
+
+  create_table "messages", force: true do |t|
+    t.text     "body"
+    t.integer  "conversation_id"
+    t.integer  "user_id"
+    t.boolean  "read",            default: false
+    t.boolean  "notification",    default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "messages", ["conversation_id"], name: "index_messages_on_conversation_id"
+  add_index "messages", ["user_id"], name: "index_messages_on_user_id"
 
   create_table "students", force: true do |t|
     t.string   "name"

@@ -4,9 +4,6 @@ class User < ActiveRecord::Base
   has_many :user_courses
   has_many :courses, through: :user_courses
 
-  has_many :messages
-  has_many :users, through: :messages
-
 
   before_save { self.email = email.downcase }
   validates :name, presence: true, length: { maximum: 50 }

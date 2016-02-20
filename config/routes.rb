@@ -1,8 +1,6 @@
 Classportal::Application.routes.draw do
 
 
-  resources :messages
-
   resources :user_courses
 
   resources :users
@@ -16,6 +14,10 @@ Classportal::Application.routes.draw do
   resources :instructors
 
   resources :admins
+
+  resources :conversations do
+    resources :messages
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
